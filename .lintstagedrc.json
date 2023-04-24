@@ -1,4 +1,4 @@
 {
   "*.{ts, vue}": "eslint",
-  "*.{js, cjs, json, ts, css, md}": "npm run format"
+  "*.{js, cjs, json, ts, css, md, yml}": "prettier --write"
 }
