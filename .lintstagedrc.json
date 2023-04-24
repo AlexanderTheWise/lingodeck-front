@@ -1,0 +1,4 @@
+{
+  "*.{ts, vue}": "eslint",
+  "*.{js, cjs, json, ts, css, md}": "npm run format"
+}
