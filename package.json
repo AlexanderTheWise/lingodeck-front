@@ -6,7 +6,7 @@
     "dev": "vite",
     "build": "run-p type-check build-only",
     "preview": "vite preview",
-    "test": "vitest --passWithNoTest",
+    "test": "vitest --passWithNoTests",
     "coverage": "vitest run --coverage --passWithNoTests",
     "build-only": "vite build"
   },
