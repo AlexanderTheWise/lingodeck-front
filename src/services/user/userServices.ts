@@ -7,7 +7,7 @@ import {
 } from "@/types";
 
 interface UserServices {
-  loginUser: (userCredentials: UserCredentials) => void;
+  loginUser: (userCredentials: UserCredentials) => Promise<void>;
 }
 
 const lingodeckBack: string = import.meta.env.VITE_LINGODECK_BACK;
