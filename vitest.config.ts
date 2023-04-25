@@ -15,6 +15,7 @@ export default mergeConfig(
         provider: "c8",
         reporter: ["lcov", "html"],
       },
+      setupFiles: "./src/mocks/vitestSetup.ts",
     },
   })
 );

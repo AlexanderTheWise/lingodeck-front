@@ -15,4 +15,6 @@ jobs:
         run: npm ci
 
       - name: 🧪 Testing
+        env:
+          VITE_LINGODECK_BACK: ${{ secrets.VITE_LINGODECK_BACK }}
         run: npm test

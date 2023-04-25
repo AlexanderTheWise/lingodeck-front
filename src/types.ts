@@ -10,3 +10,9 @@ export interface User extends LoginTokenPayload {
 export interface UserState extends User {
   isLogged: boolean;
 }
+
+export interface UserCredentials extends Pick<LoginTokenPayload, "username"> {
+  password: string;
+}
+
+export type Token = Pick<User, "token">;
