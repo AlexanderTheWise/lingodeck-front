@@ -16,6 +16,8 @@ jobs:
       - name: Node Modules
         run: npm ci
       - name: Coverage
+        env:
+          VITE_LINGODECK_BACK: ${{ secrets.VITE_LINGODECK_BACK }}
         run: npm run coverage
       - name: SonarCloud Scan
         uses: SonarSource/sonarcloud-github-action@master
