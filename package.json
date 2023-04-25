@@ -6,8 +6,8 @@
     "dev": "vite",
     "build": "run-p type-check build-only",
     "preview": "vite preview",
-    "test": "vitest --passWithNoTests",
-    "coverage": "vitest run --coverage --passWithNoTests",
+    "test": "vitest",
+    "coverage": "vitest run --coverage",
     "build-only": "vite build"
   },
   "dependencies": {
