@@ -3,11 +3,7 @@ import { createPinia, setActivePinia } from "pinia";
 import { describe, it, vi } from "vitest";
 import userServices from "./userServices";
 import useUserStore from "@/store/user/userStore";
-import { mockUser } from "@/mocks/data";
-
-vi.mock("jwt-decode", () => ({
-  default: vi.fn(),
-}));
+import { mockTokenPayload, mockUser } from "@/mocks/data";
 
 describe("loginUser service function", () => {
   setActivePinia(createPinia());
