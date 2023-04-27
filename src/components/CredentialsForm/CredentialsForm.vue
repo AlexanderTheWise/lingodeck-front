@@ -27,10 +27,10 @@ const areCorrect = computed(() =>
     class="credentials box-column"
     @submit.prevent="$emit('submit', credentials)"
   >
-    <legend class="credentials__title">
-      <slot name="purpose"></slot> To Continue
-    </legend>
     <fieldset class="credentials__set box-column">
+      <legend class="credentials__title">
+        <slot name="purpose"></slot> To Continue
+      </legend>
       <label>
         Username
         <input
@@ -78,6 +78,7 @@ const areCorrect = computed(() =>
   &__title {
     font-size: 1.7777777777777777rem;
     font-weight: 800;
+    margin-bottom: 1.44rem;
   }
 
   &__set {

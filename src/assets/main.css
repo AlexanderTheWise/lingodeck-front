@@ -1,0 +1,56 @@
+@import url("../../node_modules/@fontsource/inter/");
+
+html {
+  font-size: 18px;
+  font-family: "Inter", sans-serif;
+}
+
+body {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+*,
+*::before,
+*::after,
+*:focus {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font: inherit;
+  outline: none;
+}
+
+ul,
+ol {
+  list-style: none;
+  text-indent: 0;
+}
+
+input,
+label {
+  display: block;
+  background-color: transparent;
+}
+
+fieldset {
+  border: 0;
+}
+
+button {
+  background-color: transparent;
+  cursor: pointer;
+  border: 0;
+}
+
+.box-row {
+  display: flex;
+  flex-direction: row;
+}
+
+.box-column {
+  display: flex;
+  flex-direction: column;
+}
