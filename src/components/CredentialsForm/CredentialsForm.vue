@@ -2,7 +2,7 @@
 import { ref, reactive, computed } from "vue";
 import EyeOpen from "../icons/EyeOpen.vue";
 import EyeClosed from "../icons/EyeClosed.vue";
-import type { UserCredentials } from "@/types";
+import type { UserCredentials } from "../../types";
 
 defineEmits<{ (e: "submit", user: UserCredentials): void }>();
 
