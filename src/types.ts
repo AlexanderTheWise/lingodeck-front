@@ -1,3 +1,4 @@
+// USER
 export interface LoginTokenPayload {
   id: string;
   username: string;
@@ -16,3 +17,20 @@ export interface UserCredentials extends Pick<LoginTokenPayload, "username"> {
 }
 
 export type Token = Pick<User, "token">;
+
+// UI
+
+export interface ModalPayload {
+  title: string;
+  message: string;
+  isError: boolean;
+}
+export interface Modal extends ModalPayload {
+  isOpened: boolean;
+}
+
+export interface UiState {
+  openEyes: boolean;
+  isLoading: boolean;
+  modal: Modal;
+}
