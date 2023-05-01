@@ -32,16 +32,6 @@ describe("closeModal action", () => {
   });
 });
 
-describe("openEyes action", () => {
-  it("should set openEyes to true", ({ expect }) => {
-    expect(uiStore.ui.openEyes).toBe(false);
-
-    uiStore.openEyes();
-
-    expect(uiStore.ui.openEyes).toBe(true);
-  });
-});
-
 describe("closeEyes action", () => {
   it("should set openEyes to false", ({ expect }) => {
     expect(uiStore.ui.openEyes).toBe(true);
@@ -49,6 +39,16 @@ describe("closeEyes action", () => {
     uiStore.closeEyes();
 
     expect(uiStore.ui.openEyes).toBe(false);
+  });
+});
+
+describe("openEyes action", () => {
+  it("should set openEyes to true", ({ expect }) => {
+    expect(uiStore.ui.openEyes).toBe(false);
+
+    uiStore.openEyes();
+
+    expect(uiStore.ui.openEyes).toBe(true);
   });
 });
 
