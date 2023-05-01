@@ -16,6 +16,9 @@ export default mergeConfig(
         reporter: ["lcov", "html"],
       },
       setupFiles: "./src/mocks/vitestSetup.ts",
+      deps: {
+        inline: ["vitest-canvas-mock"],
+      },
     },
   })
 );
