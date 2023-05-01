@@ -5,7 +5,7 @@ import patchState from "../patchState";
 
 export const uiInitialState: UiState = {
   isLoading: false,
-  openEyes: false,
+  openEyes: true,
   modal: {
     isError: false,
     isOpened: false,
@@ -15,7 +15,7 @@ export const uiInitialState: UiState = {
 };
 
 const useUiStore = defineStore("ui", () => {
-  const ui = reactive<UiState>(uiInitialState);
+  const ui = reactive<UiState>(uiInitialState) as UiState;
 
   function openEyes() {
     patchState(ui, { ...ui, openEyes: true });
@@ -45,7 +45,7 @@ const useUiStore = defineStore("ui", () => {
   }
 
   return {
-    ui,
+    ui: ui as UiState,
     openEyes,
     closeEyes,
     openModal,
