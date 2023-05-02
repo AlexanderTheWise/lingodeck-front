@@ -14,6 +14,7 @@ useEyes();
 <style scoped>
 .box-row {
   gap: 100px;
+  justify-content: center;
 }
 .eye {
   width: 100px;
