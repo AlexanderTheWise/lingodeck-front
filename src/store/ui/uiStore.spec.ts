@@ -1,4 +1,3 @@
-import { describe, it } from "vitest";
 import { createPinia, setActivePinia } from "pinia";
 import useUiStore, { uiInitialState } from "./uiStore";
 import { modalPayload, openedModal } from "@/mocks/data";

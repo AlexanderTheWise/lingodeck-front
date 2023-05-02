@@ -1,8 +1,10 @@
 <script setup lang="ts">
-import { ref, reactive, computed } from "vue";
+import { ref, reactive, computed, watch } from "vue";
 import EyeOpen from "../icons/EyeOpen.vue";
 import EyeClosed from "../icons/EyeClosed.vue";
 import type { UserCredentials } from "../../types";
+import BecIcon from "../icons/BecIcon.vue";
+import useUiStore from "@/store/ui/uiStore";
 
 defineEmits<{ (e: "submit", user: UserCredentials): void }>();
 
@@ -10,16 +12,24 @@ const commonAttributes = {
   maxLength: 24,
   pattern: "^[a-zA-Z0-9]{8,24}$",
 };
-
 const credentials = reactive<UserCredentials>({
   username: "",
   password: "",
 });
+const uiStore = useUiStore();
 
 const isVisible = ref(false);
 const areCorrect = computed(() =>
   Object.values(credentials).every((value) => /^[a-zA-Z0-9]{8,24}$/.test(value))
 );
+
+watch(isVisible, (isVisible) => {
+  if (isVisible) {
+    uiStore.openEyes();
+  } else {
+    uiStore.closeEyes();
+  }
+});
 </script>
 
 <template>
@@ -27,10 +37,9 @@ const areCorrect = computed(() =>
     class="credentials box-column"
     @submit.prevent="$emit('submit', credentials)"
   >
+    <BecIcon class="credentials__bec" />
     <fieldset class="credentials__set box-column">
-      <legend class="credentials__title">
-        <slot name="purpose"></slot> To Continue
-      </legend>
+      <legend class="credentials__title"><slot></slot> To Continue</legend>
       <label>
         Username
         <input
@@ -38,7 +47,7 @@ const areCorrect = computed(() =>
           class="credentials__entry"
           placeholder="Enter username"
           v-bind="commonAttributes"
-          v-model="credentials.username"
+          v-model.trim="credentials.username"
         />
       </label>
 
@@ -49,7 +58,7 @@ const areCorrect = computed(() =>
             :type="isVisible ? 'text' : 'password'"
             placeholder="Enter password"
             v-bind="commonAttributes"
-            v-model="credentials.password"
+            v-model.trim="credentials.password"
           />
 
           <button
@@ -64,7 +73,7 @@ const areCorrect = computed(() =>
       </label>
     </fieldset>
     <button class="credentials__button" :disabled="!areCorrect">
-      <slot name="purpose"></slot>
+      <slot></slot>
     </button>
   </form>
 </template>
@@ -74,6 +83,16 @@ const areCorrect = computed(() =>
   gap: 1.6rem;
   text-align: center;
   align-items: center;
+  background-color: white;
+
+  padding-top: 70px;
+  border-top-right-radius: 185px;
+  border-top-left-radius: 185px;
+
+  &__bec {
+    position: absolute;
+    top: 21%;
+  }
 
   &__title {
     font-size: 1.7777777777777777rem;

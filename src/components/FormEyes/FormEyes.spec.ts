@@ -1,6 +1,6 @@
 import { mount } from "@vue/test-utils";
 import { createTestingPinia } from "@pinia/testing";
-import { describe, it, vi, type Mock } from "vitest";
+import { type Mock } from "vitest";
 import FormEyes from "./FormEyes.vue";
 import Lottie from "lottie-web";
 import useUiStore from "@/store/ui/uiStore";

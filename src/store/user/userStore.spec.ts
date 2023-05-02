@@ -1,6 +1,5 @@
 import { type UserState, type User } from "@/types";
 import { setActivePinia, createPinia } from "pinia";
-import { describe, it, expect } from "vitest";
 import useUserStore, { userInitialState } from "./userStore";
 
 describe("A userStore", () => {
