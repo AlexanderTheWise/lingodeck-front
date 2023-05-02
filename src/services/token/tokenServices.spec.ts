@@ -2,7 +2,6 @@ import { mockTokenPayload, mockUser } from "@/mocks/data";
 import useUserStore from "@/store/user/userStore";
 import decodeToken from "jwt-decode";
 import { createPinia, setActivePinia } from "pinia";
-import { describe, it, vi } from "vitest";
 import tokenServices from "./tokenServices";
 
 describe("getToken service function", () => {

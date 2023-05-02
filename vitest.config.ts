@@ -19,6 +19,7 @@ export default mergeConfig(
       deps: {
         inline: ["vitest-canvas-mock"],
       },
+      globals: true,
     },
   })
 );

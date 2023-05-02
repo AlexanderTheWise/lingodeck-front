@@ -1,5 +1,4 @@
 import "vitest-canvas-mock";
-import { beforeAll, afterEach, afterAll, vi } from "vitest";
 import server from "./setupServer";
 
 vi.mock("jwt-decode", () => ({

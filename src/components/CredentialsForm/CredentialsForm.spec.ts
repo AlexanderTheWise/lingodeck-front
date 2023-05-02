@@ -1,8 +1,6 @@
 import { mount } from "@vue/test-utils";
-import { describe, it } from "vitest";
 import CredentialsForm from "./CredentialsForm.vue";
-import type { UserCredentials } from "@/types";
-import { mockUser } from "@/mocks/data";
+import { mockCredentials } from "@/mocks/data";
 import EyeOpen from "../icons/EyeOpen.vue";
 import EyeClosed from "../icons/EyeClosed.vue";
 
@@ -14,11 +12,6 @@ describe("CredentialsForm component", () => {
           purpose: "Log in",
         },
       });
-
-    const credentials: UserCredentials = {
-      username: mockUser.username,
-      password: "wiseuser",
-    };
 
     it("renders a title 'Log in To Continue' and submit button 'Log in'", ({
       expect,
@@ -53,8 +46,8 @@ describe("CredentialsForm component", () => {
 
       expect(button.element.disabled).toBe(true);
 
-      await username.setValue(credentials.username);
-      await password.setValue(credentials.password);
+      await username.setValue(mockCredentials.username);
+      await password.setValue(mockCredentials.password);
 
       expect(button.element.disabled).toBe(false);
     });
@@ -88,11 +81,11 @@ describe("CredentialsForm component", () => {
       const form = wrapper.find("form");
       const [username, password] = form.findAll("input");
 
-      await username.setValue(credentials.username);
-      await password.setValue(credentials.password);
+      await username.setValue(mockCredentials.username);
+      await password.setValue(mockCredentials.password);
       await form.trigger("submit");
 
-      expect(wrapper.emitted("submit")![0][0]).toStrictEqual(credentials);
+      expect(wrapper.emitted("submit")![0][0]).toStrictEqual(mockCredentials);
     });
   });
 });
