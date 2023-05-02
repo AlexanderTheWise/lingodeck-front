@@ -3,13 +3,17 @@ import CredentialsForm from "./CredentialsForm.vue";
 import { mockCredentials } from "@/mocks/data";
 import EyeOpen from "../icons/EyeOpen.vue";
 import EyeClosed from "../icons/EyeClosed.vue";
+import { createTestingPinia } from "@pinia/testing";
 
 describe("CredentialsForm component", () => {
-  describe("receives slot purpose 'Log in'", () => {
+  describe("receives slot 'Log in'", () => {
     const credentialsFormMount = () =>
       mount(CredentialsForm, {
+        global: {
+          plugins: [createTestingPinia()],
+        },
         slots: {
-          purpose: "Log in",
+          default: "Log in",
         },
       });
 
