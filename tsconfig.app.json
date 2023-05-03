@@ -8,7 +8,7 @@
   ],
   "exclude": ["src/**/*.spec.ts"],
   "compilerOptions": {
-    "lib": ["ESNext"],
+    "lib": ["ESNext", "DOM"],
     "composite": true,
     "baseUrl": ".",
     "paths": {
