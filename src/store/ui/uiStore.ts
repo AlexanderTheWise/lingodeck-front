@@ -15,7 +15,9 @@ export const uiInitialState: UiState = {
 };
 
 const useUiStore = defineStore("ui", () => {
-  const ui = reactive<UiState>(uiInitialState) as UiState;
+  const ui = reactive<UiState>(
+    JSON.parse(JSON.stringify(uiInitialState))
+  ) as UiState;
 
   function openEyes() {
     patchState(ui, { ...ui, openEyes: true });
