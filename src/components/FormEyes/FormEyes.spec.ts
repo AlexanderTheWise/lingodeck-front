@@ -46,11 +46,14 @@ describe("FormEyes component", () => {
     wrapper.unmount();
   });
 
-  it("should play 1 to 20 frames when setting openEyes to true", async ({
+  it("should play 1 to 20 frames when setting openEyes to true if the eyes are closed", async ({
     expect,
   }) => {
-    playSegments.mockClear();
     const wrapper = mountFormEyes();
+
+    useUiStore().closeEyes();
+    await wrapper.vm.$nextTick();
+    playSegments.mockClear();
 
     useUiStore().openEyes();
     await wrapper.vm.$nextTick();
