@@ -7,25 +7,15 @@ html {
 
 body {
   height: 100vh;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
 }
 
-main {
-  align-items: center;
-  justify-content: center;
-}
-
-*:not(dialog)::after,
-*:not(dialog)::before,
-*:not(dialog)::after,
-*:not(dialog):focus {
+*,
+*:focus {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
-  font: inherit;
   outline: none;
+  font: inherit;
 }
 
 ul,

@@ -1,11 +1,13 @@
 <script setup lang="ts">
 import Loader from "./components/Loader/Loader.vue";
-import ModalVue from "./components/Modal/Modal.vue";
+import Modal from "./components/Modal/Modal.vue";
+import LoginPage from "./pages/Login/LoginPage.vue";
 </script>
 
 <template>
-  <ModalVue />
-  <main class="box-row">
-    <Loader />
+  <Modal />
+  <Loader />
+  <main class="box-column">
+    <LoginPage />
   </main>
 </template>

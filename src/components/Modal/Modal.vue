@@ -38,6 +38,9 @@ watch(uiStore.ui, ({ modal: { isOpened } }) => {
   color: white;
   width: 300px;
 
+  margin: auto;
+  padding: 1rem;
+
   &--error {
     background-color: #c90c00;
   }
@@ -54,6 +57,7 @@ watch(uiStore.ui, ({ modal: { isOpened } }) => {
 
   &__title {
     font-size: 20px;
+    margin-bottom: 25px;
   }
 }
 </style>
