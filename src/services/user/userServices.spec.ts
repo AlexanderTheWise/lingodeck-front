@@ -54,7 +54,7 @@ describe("loginUser service function", () => {
 });
 
 describe("registerUser service function", () => {
-  describe.only("when called with correct username and password", () => {
+  describe("when called with correct username and password", () => {
     it("should set and unset loading, call openModal with registerConfirm and redirect user to login page", async () => {
       await registerUser(mockCredentials);
 
