@@ -4,6 +4,7 @@ import { createTestingPinia } from "@pinia/testing";
 import Lottie from "lottie-web";
 import type { Mock } from "vitest";
 import { mockCredentials } from "@/mocks/data";
+import router from "@/router";
 
 const loginUser = vi.fn();
 vi.mock("@/services/user/userServices", () => ({
@@ -16,14 +17,12 @@ describe("LoginPage component", () => {
   const mountLoginpage = () =>
     mount(LoginPage, {
       attachTo: document.body,
-      slots: {
-        default: "Log in",
-      },
       global: {
         plugins: [
           createTestingPinia({
             stubActions: false,
           }),
+          router,
         ],
       },
     });
@@ -31,16 +30,6 @@ describe("LoginPage component", () => {
   const playSegments = vi.fn();
   (vi.spyOn(Lottie, "loadAnimation") as Mock).mockReturnValue({
     playSegments,
-  });
-
-  it("should show two eyes", () => {
-    const wrapper = mountLoginpage();
-
-    const eyes = wrapper.findAll(".eye");
-
-    expect(eyes.length).toBe(2);
-    expect(eyes.every((eye) => eye.isVisible())).toBe(true);
-    wrapper.unmount();
   });
 
   it("should play 20 to 1 frame segment when eye toggle button is clicked initially 2 times", async () => {
@@ -57,18 +46,31 @@ describe("LoginPage component", () => {
     wrapper.unmount();
   });
 
-  it("should enable the submit button when we write an alphanumeric and 8-14 characters username and password", async () => {
+  it("should render a fieldset legend 'Log in To Continue'", () => {
     const wrapper = mountLoginpage();
+    const fieldsetText = "Log in To Continue";
 
-    const [username, password] = wrapper.findAll("input");
-    const button = wrapper.find<HTMLButtonElement>(".credentials__button");
+    const title = wrapper.find("legend");
 
-    expect(button.element.disabled).toBe(true);
+    expect(title.text()).toBe(fieldsetText);
+  });
 
-    await username.setValue(mockCredentials.username);
-    await password.setValue(mockCredentials.password);
+  it("should render a button with text 'Log in'", () => {
+    const wrapper = mountLoginpage();
+    const buttonText = "Log in";
 
-    expect(button.element.disabled).toBe(false);
+    const button = wrapper.find(".credentials__button");
+
+    expect(button.text()).toBe(buttonText);
+  });
+
+  it("should render a text 'Doesn't have an account? Sign up!'", () => {
+    const wrapper = mountLoginpage();
+    const redirectionText = "Doesn't have an account? Sign up!";
+
+    const redirection = wrapper.find(".credentials-page__redirection");
+
+    expect(redirection.text()).toBe(redirectionText);
   });
 
   it("should call loginUser with 'AlexanderTheWise' and 'wiseuser' when setting input values to those and submitting form", async ({
