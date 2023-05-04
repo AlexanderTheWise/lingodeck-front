@@ -1,24 +1,50 @@
 import decodeToken from "jwt-decode";
-import { createPinia, setActivePinia } from "pinia";
+import { setActivePinia } from "pinia";
+import { createTestingPinia } from "@pinia/testing";
 import userServices from "./userServices";
 import useUserStore from "@/store/user/userStore";
-import { mockTokenPayload, mockUser } from "@/mocks/data";
+import { mockCredentials, mockTokenPayload, mockUser } from "@/mocks/data";
+import useUiStore from "@/store/ui/uiStore";
+import modalPayloads from "@/store/ui/modalPayloads";
+
+afterEach(() => {
+  vi.clearAllMocks();
+});
 
 describe("loginUser service function", () => {
-  setActivePinia(createPinia());
+  setActivePinia(createTestingPinia({ stubActions: false }));
 
   const userStore = useUserStore();
+  const uiStore = useUiStore();
+  vi.mocked(decodeToken).mockReturnValue(mockTokenPayload);
 
-  it("should update user state and set isLogged to true, when called with correct username and password", async ({
-    expect,
-  }) => {
-    vi.mocked(decodeToken).mockReturnValue(mockTokenPayload);
+  describe("when called with correct username and password", () => {
+    it("should update user state and set isLogged to true, and set and unset the loader", async ({
+      expect,
+    }) => {
+      await userServices().loginUser({
+        username: mockCredentials.username,
+        password: mockCredentials.password,
+      });
 
-    await userServices().loginUser({
-      username: mockTokenPayload.username,
-      password: "user1",
+      expect(uiStore.setLoading).toHaveBeenCalled();
+      expect(userStore.user).toStrictEqual(mockUser);
+      expect(uiStore.unsetLoading).toHaveBeenCalled();
     });
+  });
 
-    expect(userStore.user).toStrictEqual(mockUser);
+  describe("when called with incorrect username or password", () => {
+    it("should set and unset the loader and call openModal with loginError", async () => {
+      await userServices().loginUser({
+        username: "AlexanderTheSilly",
+        password: "user2",
+      });
+
+      expect(uiStore.setLoading).toHaveBeenCalled();
+      expect(uiStore.unsetLoading).toHaveBeenCalled();
+      expect(uiStore.openModal).toHaveBeenLastCalledWith(
+        modalPayloads.errors.loginError
+      );
+    });
   });
 });
