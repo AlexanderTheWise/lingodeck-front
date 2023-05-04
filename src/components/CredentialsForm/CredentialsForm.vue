@@ -91,11 +91,11 @@ watch(isVisible, (isVisible) => {
 
   &__bec {
     position: absolute;
-    top: 21%;
+    top: 9%;
   }
 
   &__title {
-    font-size: 1.7777777777777777rem;
+    font-size: 1.78rem;
     font-weight: 800;
     margin-bottom: 1.44rem;
   }
@@ -112,7 +112,7 @@ watch(isVisible, (isVisible) => {
     padding-left: 1rem;
     padding-right: 1rem;
 
-    width: 13.278rem;
+    width: 239px;
     height: 2.556rem;
 
     border: 2px solid #0080ff;
