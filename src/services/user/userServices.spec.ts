@@ -11,6 +11,11 @@ afterEach(() => {
   vi.clearAllMocks();
 });
 
+const push = vi.fn();
+vi.mock("vue-router", () => ({
+  useRouter: () => ({ push }),
+}));
+
 setActivePinia(createTestingPinia({ stubActions: false }));
 const userStore = useUserStore();
 const uiStore = useUiStore();
@@ -49,8 +54,8 @@ describe("loginUser service function", () => {
 });
 
 describe("registerUser service function", () => {
-  describe("when called with correct username and password", () => {
-    it("should set and unset loading and call openModal with registerConfirm", async () => {
+  describe.only("when called with correct username and password", () => {
+    it("should set and unset loading, call openModal with registerConfirm and redirect user to login page", async () => {
       await registerUser(mockCredentials);
 
       expect(uiStore.setLoading).toHaveBeenCalled();
@@ -58,6 +63,7 @@ describe("registerUser service function", () => {
       expect(uiStore.openModal).toHaveBeenCalledWith(
         modalPayloads.confirm.registerConfirm
       );
+      expect(push).toHaveBeenCalledWith({ name: "Log in" });
     });
   });
 
