@@ -24,6 +24,10 @@ ol {
   text-indent: 0;
 }
 
+a {
+  text-decoration: none;
+}
+
 input,
 label {
   display: block;
