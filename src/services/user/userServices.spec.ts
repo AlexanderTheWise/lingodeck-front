@@ -11,21 +11,20 @@ afterEach(() => {
   vi.clearAllMocks();
 });
 
-describe("loginUser service function", () => {
-  setActivePinia(createTestingPinia({ stubActions: false }));
+setActivePinia(createTestingPinia({ stubActions: false }));
+const userStore = useUserStore();
+const uiStore = useUiStore();
 
-  const userStore = useUserStore();
-  const uiStore = useUiStore();
+const { loginUser, registerUser } = userServices();
+
+describe("loginUser service function", () => {
   vi.mocked(decodeToken).mockReturnValue(mockTokenPayload);
 
   describe("when called with correct username and password", () => {
     it("should update user state and set isLogged to true, and set and unset the loader", async ({
       expect,
     }) => {
-      await userServices().loginUser({
-        username: mockCredentials.username,
-        password: mockCredentials.password,
-      });
+      await loginUser(mockCredentials);
 
       expect(uiStore.setLoading).toHaveBeenCalled();
       expect(userStore.user).toStrictEqual(mockUser);
@@ -35,7 +34,7 @@ describe("loginUser service function", () => {
 
   describe("when called with incorrect username or password", () => {
     it("should set and unset the loader and call openModal with loginError", async () => {
-      await userServices().loginUser({
+      await loginUser({
         username: "AlexanderTheSilly",
         password: "user2",
       });
@@ -44,6 +43,35 @@ describe("loginUser service function", () => {
       expect(uiStore.unsetLoading).toHaveBeenCalled();
       expect(uiStore.openModal).toHaveBeenLastCalledWith(
         modalPayloads.errors.loginError
+      );
+    });
+  });
+});
+
+describe("registerUser service function", () => {
+  describe("when called with correct username and password", () => {
+    it("should set and unset loading and call openModal with registerConfirm", async () => {
+      await registerUser(mockCredentials);
+
+      expect(uiStore.setLoading).toHaveBeenCalled();
+      expect(uiStore.unsetLoading).toHaveBeenCalled();
+      expect(uiStore.openModal).toHaveBeenCalledWith(
+        modalPayloads.confirm.registerConfirm
+      );
+    });
+  });
+
+  describe("when called with incorrect username and password", () => {
+    it("should set and unset loading and call openModal with registerError", async () => {
+      await registerUser({
+        username: "Alexan%12312",
+        password: "mmmm*+`+`+`+`---",
+      });
+
+      expect(uiStore.setLoading).toHaveBeenCalled();
+      expect(uiStore.unsetLoading).toHaveBeenCalled();
+      expect(uiStore.openModal).toHaveBeenCalledWith(
+        modalPayloads.errors.registerError
       );
     });
   });

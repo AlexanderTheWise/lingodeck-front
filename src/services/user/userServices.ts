@@ -6,9 +6,12 @@ import {
   type UserCredentials,
 } from "@/types";
 import useUiStore from "@/store/ui/uiStore";
+import modalPayloads from "@/store/ui/modalPayloads";
 
+type Service = (userCredentials: UserCredentials) => Promise<void>;
 interface UserServices {
-  loginUser: (userCredentials: UserCredentials) => Promise<void>;
+  loginUser: Service;
+  registerUser: Service;
 }
 
 const lingodeckBack: string = import.meta.env.VITE_LINGODECK_BACK;
@@ -26,6 +29,8 @@ const userServices = (): UserServices => {
         body: JSON.stringify(userCredentials),
       });
 
+      if (!response.ok) throw new Error();
+
       const { token } = (await response.json()) as Token;
       const tokenPayload = decodeToken<LoginTokenPayload>(token);
       localStorage.setItem("token", token);
@@ -34,15 +39,30 @@ const userServices = (): UserServices => {
       uiStore.unsetLoading();
     } catch (error) {
       uiStore.unsetLoading();
-      uiStore.openModal({
-        isError: true,
-        title: "Couldn't login",
-        message: "Please, try again",
-      });
+      uiStore.openModal(modalPayloads.errors.loginError);
     }
   };
 
-  return { loginUser };
+  const registerUser = async (userCredentials: UserCredentials) => {
+    try {
+      uiStore.setLoading();
+      const response = await fetch(`${lingodeckBack}/user/register`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(userCredentials),
+      });
+
+      if (!response.ok) throw new Error();
+
+      uiStore.unsetLoading();
+      uiStore.openModal(modalPayloads.confirm.registerConfirm);
+    } catch (error) {
+      uiStore.unsetLoading();
+
+      uiStore.openModal(modalPayloads.errors.registerError);
+    }
+  };
+  return { loginUser, registerUser };
 };
 
 export default userServices;
