@@ -1,3 +1,4 @@
+import { useRouter } from "vue-router";
 import decodeToken from "jwt-decode";
 import useUserStore from "@/store/user/userStore";
 import {
@@ -19,6 +20,7 @@ const lingodeckBack: string = import.meta.env.VITE_LINGODECK_BACK;
 const userServices = (): UserServices => {
   const userStore = useUserStore();
   const uiStore = useUiStore();
+  const router = useRouter();
 
   const loginUser = async (userCredentials: UserCredentials) => {
     try {
@@ -54,6 +56,7 @@ const userServices = (): UserServices => {
 
       if (!response.ok) throw new Error();
 
+      router.push({ name: "Log in" });
       uiStore.unsetLoading();
       uiStore.openModal(modalPayloads.confirm.registerConfirm);
     } catch (error) {
