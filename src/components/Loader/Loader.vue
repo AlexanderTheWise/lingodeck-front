@@ -5,15 +5,25 @@ const uiState = useUiStore().ui;
 </script>
 
 <template>
-  <span class="loader" v-if="uiState.isLoading"></span>
+  <div class="loader-container box-column" v-if="uiState.isLoading">
+    <div class="loader"></div>
+  </div>
 </template>
 
 <style scoped lang="scss">
+.loader-container {
+  position: fixed;
+  width: 100vw;
+  height: 100vh;
+  background-color: white;
+  z-index: 9999;
+  justify-content: center;
+  align-items: center;
+}
 .loader {
   width: 48px;
   height: 48px;
   border-radius: 50%;
-  position: relative;
   animation: rotate 1s linear infinite;
 
   &::before {
