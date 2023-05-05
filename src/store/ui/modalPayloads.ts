@@ -25,6 +25,11 @@ const modalPayloads: ModalPayloads = {
       title: "Couldn't register",
       message: "Please, try again",
     },
+    getFlashcardsError: {
+      isError: true,
+      title: "Error getting flashcards",
+      message: "Couldn't get the requested flashcards",
+    },
   },
 };
 
