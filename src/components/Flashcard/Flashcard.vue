@@ -26,6 +26,7 @@ const isFlipped = ref(false);
           <FlashcardDelete />
         </button>
         <img
+          :alt="n == 1 ? front : back"
           width="293"
           height="144"
           class="card__image"
@@ -34,7 +35,7 @@ const isFlipped = ref(false);
         <div class="card__content box-column">
           <span class="card__due-date"
             >Due date:
-            {{ new Date(dueDate).toLocaleString().split(",")[0] }}</span
+            {{ new Date(dueDate).toLocaleString("es").split(",")[0] }}</span
           >
           <p>{{ n === 1 ? front : back }}</p>
           <a class="card__link-modify"><FlashcardModify /></a>
