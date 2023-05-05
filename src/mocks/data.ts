@@ -1,4 +1,6 @@
 import type {
+  Flashcard,
+  Flashcards,
   LoginTokenPayload,
   Modal,
   ModalPayload,
@@ -30,4 +32,51 @@ export const modalPayload: ModalPayload = {
 export const openedModal: Modal = {
   ...modalPayload,
   isOpened: true,
+};
+
+export const mockFlashcards: Flashcards = [
+  {
+    id: "1",
+    front: "Hello",
+    back: "Bonjour",
+    imageInfo: {
+      fileName: "hello.jpg",
+      imageBackup: "https://via.placeholder.com/150",
+    },
+    language: "English",
+    dueDate: "2023-06-01T00:00:00.000Z",
+  },
+  {
+    id: "2",
+    front: "Bon appétit",
+    back: "Enjoy your meal",
+    imageInfo: {
+      fileName: "bon-appetit.jpg",
+      imageBackup: "https://via.placeholder.com/150",
+    },
+    language: "French",
+    dueDate: "2023-05-05T00:00:00.000Z",
+  },
+  {
+    id: "3",
+    front: "Thank you",
+    back: "Gracias",
+    imageInfo: {
+      fileName: "thank-you.jpg",
+      imageBackup: "https://via.placeholder.com/150",
+    },
+    language: "English",
+    dueDate: "2023-05-15T00:00:00.000Z",
+  },
+];
+
+export const newFlashcardInfo: Omit<Flashcard, "id"> = {
+  front: "How are you?",
+  back: "Comment allez-vous?",
+  imageInfo: {
+    fileName: "how-are-you.jpg",
+    imageBackup: "https://via.placeholder.com/150",
+  },
+  language: "English",
+  dueDate: "2023-05-20T00:00:00.000Z",
 };
