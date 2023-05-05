@@ -32,7 +32,7 @@ const isFlipped = ref(false);
           class="card__image"
           :src="imageInfo.imageBackup"
         />
-        <div class="card__content box-column">
+        <div class="card__content box-column centered-box">
           <span class="card__due-date"
             >Due date:
             {{ new Date(dueDate).toLocaleString("es").split(",")[0] }}</span
@@ -87,8 +87,6 @@ const isFlipped = ref(false);
 
   &__content {
     height: 50%;
-    justify-content: center;
-    align-items: center;
   }
 
   &__link-modify {
