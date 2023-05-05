@@ -5,7 +5,10 @@ const uiState = useUiStore().ui;
 </script>
 
 <template>
-  <div class="loader-container box-column" v-if="uiState.isLoading">
+  <div
+    class="loader-container box-column centered-box"
+    v-if="uiState.isLoading"
+  >
     <div class="loader"></div>
   </div>
 </template>
@@ -17,8 +20,6 @@ const uiState = useUiStore().ui;
   height: 100vh;
   background-color: white;
   z-index: 9999;
-  justify-content: center;
-  align-items: center;
 }
 .loader {
   width: 48px;

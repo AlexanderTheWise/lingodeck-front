@@ -55,3 +55,8 @@ button {
   display: flex;
   flex-direction: column;
 }
+
+.centered-box {
+  justify-content: center;
+  align-items: center;
+}
