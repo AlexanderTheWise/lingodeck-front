@@ -27,9 +27,7 @@ const flashcardsServices = (): FlashcardsServices => {
     try {
       uiStore.setLoading();
       const response = fetch(
-        `${lingodeckBack}/flashcards?${limit ? `limit=${limit}` : ""}&${
-          page ? `page=${page}` : ""
-        }&${language ? `language=${language}` : ""}"`,
+        `${lingodeckBack}/flashcards?limit=${limit}&page=${page}&$language=${language}`,
         {
           headers: new Headers({
             Authorization: `Bearer ${token}`,
