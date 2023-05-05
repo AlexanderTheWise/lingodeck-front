@@ -1,5 +1,5 @@
 import { rest } from "msw";
-import { mockCredentials, mockUser } from "./data";
+import { mockCredentials, mockFlashcards, mockUser } from "./data";
 import { type UserCredentials } from "@/types";
 
 const lingodeckBack: string = import.meta.env.VITE_LINGODECK_BACK;
@@ -23,6 +23,16 @@ const handlers = [
       )
     ) {
       return res(ctx.status(201));
+    }
+
+    return res(ctx.status(400));
+  }),
+  rest.get(`${lingodeckBack}/flashcards`, (req, res, ctx) => {
+    const limit = +req.url.searchParams.get("limit")!;
+    const page = +req.url.searchParams.get("page")!;
+
+    if (page >= 1 && limit >= 1) {
+      return res(ctx.status(200), ctx.json({ flashcards: mockFlashcards }));
     }
 
     return res(ctx.status(400));
