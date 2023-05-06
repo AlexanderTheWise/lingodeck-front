@@ -38,6 +38,7 @@ const userServices = (): UserServices => {
       localStorage.setItem("token", token);
 
       userStore.loginUser({ ...tokenPayload, token });
+      router.push({ name: "Flashcards" });
       uiStore.unsetLoading();
     } catch (error) {
       uiStore.unsetLoading();

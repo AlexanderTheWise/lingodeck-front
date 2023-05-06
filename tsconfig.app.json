@@ -4,7 +4,8 @@
     "env.d.ts",
     "src/**/*.vue",
     "src/**/*.ts",
-    "src/assets/lottie/eyes.json"
+    "src/assets/lottie/eyes.json",
+    "src/assets/languages.json"
   ],
   "exclude": ["src/**/*.spec.ts"],
   "compilerOptions": {

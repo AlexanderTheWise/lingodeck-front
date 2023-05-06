@@ -1,3 +1,4 @@
+import FlashcardsPage from "@/pages/Flashcards/FlashcardsPage.vue";
 import LoginPage from "@/pages/Login/LoginPage.vue";
 import RegisterPage from "@/pages/Register/RegisterPage.vue";
 import {
@@ -16,6 +17,11 @@ const routes: readonly RouteRecordRaw[] = [
     path: "/register",
     name: "Register",
     component: () => Promise.resolve(RegisterPage),
+  },
+  {
+    path: "/flashcards",
+    name: "Flashcards",
+    component: () => Promise.resolve(FlashcardsPage),
   },
 ];
 

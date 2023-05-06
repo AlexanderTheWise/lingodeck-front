@@ -8,7 +8,8 @@ interface FlashcardsServices {
   getFlashcards: (
     limit: number,
     page: number,
-    language: string
+    language: string,
+    shouldReturn: boolean
   ) => Promise<void | Flashcards>;
 }
 
@@ -22,16 +23,18 @@ const flashcardsServices = (): FlashcardsServices => {
   const getFlashcards = async (
     limit: number,
     page: number,
-    language: string
-  ) => {
+    language: string,
+    shouldReturn: boolean
+  ): Promise<undefined | Flashcards> => {
     try {
       uiStore.setLoading();
       const response = fetch(
-        `${lingodeckBack}/flashcards?limit=${limit}&page=${page}&$language=${language}`,
+        `${lingodeckBack}/flashcards?limit=${limit}&page=${page}&language=${language}`,
         {
-          headers: new Headers({
+          headers: {
+            "Content-Type": "application/json",
             Authorization: `Bearer ${token}`,
-          }),
+          },
         }
       );
 
@@ -41,9 +44,13 @@ const flashcardsServices = (): FlashcardsServices => {
         flashcards: Flashcards;
       };
 
+      if (shouldReturn) {
+        uiStore.unsetLoading();
+        return flashcards;
+      }
+
       flashcardsStore.loadFlashcards(flashcards);
       uiStore.unsetLoading();
-      return flashcards;
     } catch (error) {
       uiStore.unsetLoading();
 

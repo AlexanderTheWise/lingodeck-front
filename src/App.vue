@@ -1,7 +1,12 @@
 <script setup lang="ts">
 import { RouterView } from "vue-router";
-import Loader from "./components/Loader/Loader.vue";
+import tokenServices from "./services/token/tokenServices";
 import Modal from "./components/Modal/Modal.vue";
+import Loader from "./components/Loader/Loader.vue";
+
+const { getToken } = tokenServices;
+
+getToken();
 </script>
 
 <template>
