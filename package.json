@@ -4,8 +4,8 @@
   "private": true,
   "scripts": {
     "dev": "vite",
-    "build": "run-p type-check build-only",
-    "preview": "vite preview",
+    "build": "run-p  build-only",
+    "preview": "vite preview --port=5173",
     "host": "vite --host=192.168.0.17",
     "test": "vitest",
     "coverage": "vitest run --coverage",

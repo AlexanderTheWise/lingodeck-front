@@ -37,7 +37,7 @@ watch(isVisible, (isVisible) => {
     class="credentials box-column"
     @submit.prevent="$emit('submit', credentials)"
   >
-    <BecIcon class="credentials__bec" />
+    <BecIcon class="credentials__bec" v-once />
     <fieldset class="credentials__set box-column">
       <legend class="credentials__title"><slot></slot> To Continue</legend>
       <label>
