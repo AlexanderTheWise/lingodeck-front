@@ -31,6 +31,10 @@ const handlers = [
     const limit = +req.url.searchParams.get("limit")!;
     const page = +req.url.searchParams.get("page")!;
 
+    if (page === 3) {
+      return res(ctx.status(200), ctx.json({ flashcards: [] }));
+    }
+
     if (page >= 1 && limit >= 1) {
       return res(ctx.status(200), ctx.json({ flashcards: mockFlashcards }));
     }
