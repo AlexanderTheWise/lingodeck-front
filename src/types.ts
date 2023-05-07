@@ -49,4 +49,9 @@ export interface Flashcard {
   dueDate: string;
 }
 
+export interface NewOrModifiedCard
+  extends Omit<Flashcard, "imageInfo" | "id" | "dueDate"> {
+  image: File | null;
+}
+
 export type Flashcards = Flashcard[];
