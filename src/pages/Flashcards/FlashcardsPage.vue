@@ -3,10 +3,14 @@ import FlashcardsList from "@/components/FlashcardList/FlashcardsList.vue";
 import Previous from "../../components/icons/Previous.vue";
 import Counter from "@/components/Counter/Counter.vue";
 import Next from "../../components/icons/Next.vue";
-import languages from "../../assets/languages.json";
 import useFlashcards from "@/composables/useFlashcards";
+import Filter from "@/components/Filter/Filter.vue";
 
 const { flashcards, language, page } = useFlashcards();
+
+function changeLanguage(selectedLanguage: string) {
+  language.value = selectedLanguage;
+}
 </script>
 <template>
   <div class="flashcards-page box-column centered-box">
@@ -14,11 +18,7 @@ const { flashcards, language, page } = useFlashcards();
       <Counter />
     </Suspense>
 
-    <select class="flashcards-page__filter" v-model="language">
-      <option v-for="{ id, name } in languages" :key="id" :value="name">
-        {{ name }}
-      </option>
-    </select>
+    <Filter @change-language="changeLanguage" />
 
     <FlashcardsList :flashcards="flashcards" />
 
@@ -40,27 +40,6 @@ const { flashcards, language, page } = useFlashcards();
 <style scoped lang="scss">
 .flashcards-page {
   gap: 30px;
-
-  &__filter {
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    appearance: none;
-    font-size: 20px;
-    font-weight: 500;
-    width: 190px;
-    padding: 10px;
-    padding-left: 40px;
-    border: none;
-    border-radius: 20px;
-    background-color: #fff;
-    cursor: pointer;
-    box-shadow: 1px 4px 4px rgba(0, 0, 0, 0.25);
-    background: url("../../assets/dropdown.svg") no-repeat 80%;
-
-    &::-webkit-scrollbar {
-      display: none;
-    }
-  }
 
   &__pagination {
     width: 200px;

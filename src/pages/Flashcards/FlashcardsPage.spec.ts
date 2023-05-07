@@ -1,10 +1,10 @@
 import { flushPromises, mount } from "@vue/test-utils";
 import { createTestingPinia } from "@pinia/testing";
-import languages from "../../assets/languages.json";
 import FlashcardsPage from "./FlashcardsPage.vue";
 import Next from "@/components/icons/Next.vue";
 import Previous from "@/components/icons/Previous.vue";
 import Cards from "@/components/icons/Cards.vue";
+import Filter from "@/components/Filter/Filter.vue";
 
 describe("FlashcardsPage component", () => {
   const mountFlashcardsPage = () =>
@@ -18,14 +18,12 @@ describe("FlashcardsPage component", () => {
       },
     });
 
-  it("should render a filter with a list of languages", () => {
+  it("should render a Filter component", () => {
     const wrapper = mountFlashcardsPage();
 
-    const options = wrapper.findAll("option");
+    const filter = wrapper.findComponent(Filter);
 
-    options.forEach((option, index) =>
-      expect(option.text()).toBe(languages[index].name)
-    );
+    expect(filter.exists()).toBe(true);
   });
 
   it("should render two pagination buttons and they should contain Next and Previous icons components", () => {
@@ -61,7 +59,7 @@ describe("FlashcardsPage component", () => {
   it("when the next button is clicked one time and the language is changed, it should return to page 1", async () => {
     const wrapper = mountFlashcardsPage();
     const next = wrapper.find(".flashcards-page__next");
-    const languages = wrapper.find(".flashcards-page__filter");
+    const languages = wrapper.find(".filter");
     const page = wrapper.find(".flashcards-page__pagination");
 
     await next.trigger("click");
