@@ -1,10 +1,11 @@
 <script setup lang="ts">
 import Filter from "../Filter/Filter.vue";
+import { RouterLink } from "vue-router";
 import useFlashcardsForm from "../../composables/useFlashcardsForm";
 import { type NewOrModifiedCard } from "../../types";
 
 defineEmits<{
-  (event: "submit", flashcard: NewOrModifiedCard, id?: string): void;
+  (event: "submit", flashcard: NewOrModifiedCard): void;
 }>();
 
 const { changeFile, changeLanguage, newFlashcard, areCorrect } =
@@ -57,7 +58,11 @@ const { changeFile, changeLanguage, newFlashcard, areCorrect } =
       <button class="flashcards-form__action action" :disabled="!areCorrect">
         <slot></slot>
       </button>
-      <a class="flashcards-form__action link box-column centered-box">Cancel</a>
+      <RouterLink
+        class="flashcards-form__action link box-column centered-box"
+        :to="{ name: 'Flashcards' }"
+        >Cancel</RouterLink
+      >
     </div>
   </form>
 </template>

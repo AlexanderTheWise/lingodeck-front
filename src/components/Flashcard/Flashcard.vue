@@ -2,13 +2,19 @@
 import { ref, toRefs } from "vue";
 import FlashcardDelete from "../icons/FlashcardDelete.vue";
 import FlashcardModify from "../icons/FlashcardModify.vue";
+import { RouterLink } from "vue-router";
 import type { Flashcard } from "@/types";
+import flashcardsServices from "@/services/flashcards/flashcardsServices";
 
 const props = defineProps<{
   flashcard: Flashcard;
 }>();
 
-const { back, front, imageInfo, dueDate, language } = toRefs(props.flashcard);
+const { deleteFlashcard } = flashcardsServices();
+
+const { back, front, imageInfo, dueDate, language, id } = toRefs(
+  props.flashcard
+);
 
 const isFlipped = ref(false);
 </script>
@@ -22,7 +28,7 @@ const isFlipped = ref(false);
         :key="n"
       >
         <span class="card__language">{{ language }}</span>
-        <button class="card__delete">
+        <button class="card__delete" @click="deleteFlashcard(id)">
           <FlashcardDelete />
         </button>
         <img
@@ -38,7 +44,11 @@ const isFlipped = ref(false);
             {{ new Date(dueDate).toLocaleString("es").split(",")[0] }}</span
           >
           <p>{{ n === 1 ? front : back }}</p>
-          <a class="card__link-modify"><FlashcardModify /></a>
+          <RouterLink
+            class="card__link-modify"
+            :to="{ name: 'Modify', params: { id } }"
+            ><FlashcardModify
+          /></RouterLink>
         </div>
       </div>
     </div>
