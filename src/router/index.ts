@@ -1,5 +1,7 @@
 import FlashcardsPage from "@/pages/Flashcards/FlashcardsPage.vue";
 import LoginPage from "@/pages/Login/LoginPage.vue";
+import ModifyPage from "@/pages/Modify/ModifyPage.vue";
+import CreatePage from "@/pages/Create/CreatePage.vue";
 import RegisterPage from "@/pages/Register/RegisterPage.vue";
 import {
   createRouter,
@@ -22,6 +24,16 @@ const routes: readonly RouteRecordRaw[] = [
     path: "/flashcards",
     name: "Flashcards",
     component: () => Promise.resolve(FlashcardsPage),
+  },
+  {
+    path: "/modify/:id",
+    name: "Modify",
+    component: () => Promise.resolve(ModifyPage),
+  },
+  {
+    path: "/create",
+    name: "Create",
+    component: () => Promise.resolve(CreatePage),
   },
 ];
 

@@ -4,8 +4,13 @@ import decodeToken from "jwt-decode";
 import { createPinia, setActivePinia } from "pinia";
 import tokenServices from "./tokenServices";
 
+const push = vi.fn();
+vi.mock("vue-router", () => ({
+  useRouter: () => ({ push }),
+}));
+
 describe("getToken service function", () => {
-  it("should update user state and set isLogged to true, when token exists in local storage", ({
+  it("should update user state and set isLogged to true, and redirect to Flashcards page when token exists in local storage", ({
     expect,
   }) => {
     setActivePinia(createPinia());
@@ -15,7 +20,9 @@ describe("getToken service function", () => {
     vi.mocked(decodeToken).mockReturnValue(mockTokenPayload);
 
     tokenServices.getToken();
-
+    expect(push).toHaveBeenCalledWith({
+      name: "Flashcards",
+    });
     expect(useUserStore().user).toStrictEqual(mockUser);
   });
 });
