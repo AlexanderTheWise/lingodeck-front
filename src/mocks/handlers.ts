@@ -57,4 +57,7 @@ export const errorHandlers = [
   rest.delete(`${lingodeckBack}/flashcards/1`, (req, res, ctx) =>
     res(ctx.status(400))
   ),
+  rest.patch(`${lingodeckBack}/flashcards/1`, (req, res, ctx) =>
+    res(ctx.status(400))
+  ),
 ];

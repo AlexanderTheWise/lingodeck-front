@@ -4,9 +4,11 @@ import type {
   LoginTokenPayload,
   Modal,
   ModalPayload,
+  NewOrModifiedCard,
   UserCredentials,
   UserState,
 } from "@/types";
+import type { VueNode } from "@vue/test-utils/dist/types";
 
 export const mockUser: UserState = {
   username: "AlexanderTheWise",
@@ -79,4 +81,19 @@ export const newFlashcardInfo: Omit<Flashcard, "id"> = {
   },
   language: "English",
   dueDate: "2023-05-20T00:00:00.000Z",
+};
+
+export const fileValue = {
+  filename: "dog.jpg",
+};
+
+export const setFile = (element: VueNode<HTMLInputElement>) =>
+  Object.defineProperty(element, "files", {
+    value: [fileValue],
+  });
+
+export const expectedCall: Partial<NewOrModifiedCard> = {
+  front: "dog",
+  back: "perro",
+  language: "English",
 };
