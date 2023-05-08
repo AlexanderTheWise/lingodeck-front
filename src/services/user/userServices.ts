@@ -8,14 +8,18 @@ import {
 } from "@/types";
 import useUiStore from "@/store/ui/uiStore";
 import modalPayloads from "@/store/ui/modalPayloads";
+import tokenServices from "../token/tokenServices";
 
 type Service = (userCredentials: UserCredentials) => Promise<void>;
 interface UserServices {
   loginUser: Service;
   registerUser: Service;
+  logoutUser: () => void;
 }
 
 const lingodeckBack: string = import.meta.env.VITE_LINGODECK_BACK;
+
+const { removeToken } = tokenServices;
 
 const userServices = (): UserServices => {
   const userStore = useUserStore();
@@ -66,7 +70,16 @@ const userServices = (): UserServices => {
       uiStore.openModal(modalPayloads.errors.registerError);
     }
   };
-  return { loginUser, registerUser };
+
+  const logoutUser = () => {
+    uiStore.setLoading();
+    removeToken();
+    userStore.$reset();
+    uiStore.unsetLoading();
+    router.push({ name: "Log in" });
+  };
+
+  return { loginUser, registerUser, logoutUser };
 };
 
 export default userServices;

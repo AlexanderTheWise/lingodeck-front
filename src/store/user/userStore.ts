@@ -14,7 +14,7 @@ const useUserStore = defineStore("user", () => {
   const user = reactive<UserState>({ ...userInitialState });
 
   function $reset() {
-    patchState(user, userInitialState);
+    patchState(user, { ...userInitialState });
   }
 
   function loginUser(userPayload: User) {
