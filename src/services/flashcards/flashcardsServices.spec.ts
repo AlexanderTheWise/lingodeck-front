@@ -14,7 +14,7 @@ afterEach(() => {
 
 const push = vi.fn();
 vi.mock("vue-router", () => ({
-  useRouter: () => ({ push }),
+  useRouter: () => ({ push, go: vi.fn() }),
 }));
 
 setActivePinia(createTestingPinia({ stubActions: false }));

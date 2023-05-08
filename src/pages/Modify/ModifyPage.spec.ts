@@ -3,8 +3,7 @@ import ModifyPage from "./ModifyPage.vue";
 import { createTestingPinia } from "@pinia/testing";
 import router from "@/router";
 import FlashcardsForm from "@/components/FlashcardsForm/FlashcardsForm.vue";
-import type { NewOrModifiedCard } from "@/types";
-import { expectedCall, fileValue, setFile } from "@/mocks/data";
+import { expectedCall, fileValue } from "@/mocks/data";
 
 const modifyFlashcard = vi.fn();
 vi.mock("@/services/flashcards/flashcardsServices", () => ({
@@ -36,7 +35,10 @@ describe("ModifyPage component", () => {
       const [front, back, image] = wrapper.findAll("input");
       const filter = wrapper.find(".filter");
 
-      setFile(image.element);
+      Object.defineProperty(image.element, "files", {
+        value: [fileValue],
+      });
+
       await front.setValue(expectedCall.front);
       await back.setValue(expectedCall.back);
       await filter.setValue(expectedCall.language);

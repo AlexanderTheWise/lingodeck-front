@@ -2,10 +2,14 @@ import { mount } from "@vue/test-utils";
 import FlashcardsForm from "./FlashcardsForm.vue";
 import Filter from "../Filter/Filter.vue";
 import type { NewOrModifiedCard } from "@/types";
+import router from "@/router";
 
 describe("FlashcardsForm component", () => {
   const mountFlashcardsForm = () =>
     mount(FlashcardsForm, {
+      global: {
+        plugins: [router],
+      },
       slots: {
         default: "Modify",
       },

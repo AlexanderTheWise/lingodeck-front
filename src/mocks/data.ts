@@ -8,7 +8,6 @@ import type {
   UserCredentials,
   UserState,
 } from "@/types";
-import type { VueNode } from "@vue/test-utils/dist/types";
 
 export const mockUser: UserState = {
   username: "AlexanderTheWise",
@@ -86,11 +85,6 @@ export const newFlashcardInfo: Omit<Flashcard, "id"> = {
 export const fileValue = {
   filename: "dog.jpg",
 };
-
-export const setFile = (element: VueNode<HTMLInputElement>) =>
-  Object.defineProperty(element, "files", {
-    value: [fileValue],
-  });
 
 export const expectedCall: Partial<NewOrModifiedCard> = {
   front: "dog",

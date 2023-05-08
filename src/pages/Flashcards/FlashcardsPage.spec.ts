@@ -5,6 +5,7 @@ import Next from "@/components/icons/Next.vue";
 import Previous from "@/components/icons/Previous.vue";
 import Cards from "@/components/icons/Cards.vue";
 import Filter from "@/components/Filter/Filter.vue";
+import router from "@/router";
 
 describe("FlashcardsPage component", () => {
   const mountFlashcardsPage = () =>
@@ -14,6 +15,7 @@ describe("FlashcardsPage component", () => {
           createTestingPinia({
             stubActions: false,
           }),
+          router,
         ],
       },
     });
