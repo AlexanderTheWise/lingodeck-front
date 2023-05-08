@@ -41,7 +41,7 @@ defineEmits<{
   background-color: #fff;
   cursor: pointer;
   box-shadow: 1px 4px 4px rgba(0, 0, 0, 0.25);
-  background: url("../../assets/dropdown.svg") no-repeat 80%;
+  background-image: url("../../assets/dropdown.svg") no-repeat 80%;
 
   &::-webkit-scrollbar {
     display: none;

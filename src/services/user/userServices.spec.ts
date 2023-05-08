@@ -6,6 +6,7 @@ import useUserStore from "@/store/user/userStore";
 import { mockCredentials, mockTokenPayload, mockUser } from "@/mocks/data";
 import useUiStore from "@/store/ui/uiStore";
 import modalPayloads from "@/store/ui/modalPayloads";
+import { setupFaultyServer } from "@/mocks/setupServer";
 
 afterEach(() => {
   vi.clearAllMocks();
@@ -25,24 +26,20 @@ const { loginUser, registerUser } = userServices();
 describe("loginUser service function", () => {
   vi.mocked(decodeToken).mockReturnValue(mockTokenPayload);
 
-  describe("when called with correct username and password", () => {
-    it("should update user state and set isLogged to true, and set and unset the loader", async ({
-      expect,
-    }) => {
-      await loginUser(mockCredentials);
+  it("should update user state and set isLogged to true, and set and unset the loader", async ({
+    expect,
+  }) => {
+    await loginUser(mockCredentials);
 
-      expect(uiStore.setLoading).toHaveBeenCalled();
-      expect(userStore.user).toStrictEqual(mockUser);
-      expect(uiStore.unsetLoading).toHaveBeenCalled();
-    });
+    expect(uiStore.setLoading).toHaveBeenCalled();
+    expect(userStore.user).toStrictEqual(mockUser);
+    expect(uiStore.unsetLoading).toHaveBeenCalled();
   });
 
-  describe("when called with incorrect username or password", () => {
+  describe("when the response return an error status", () => {
     it("should set and unset the loader and call openModal with loginError", async () => {
-      await loginUser({
-        username: "AlexanderTheSilly",
-        password: "user2",
-      });
+      setupFaultyServer();
+      await loginUser(mockCredentials);
 
       expect(uiStore.setLoading).toHaveBeenCalled();
       expect(uiStore.unsetLoading).toHaveBeenCalled();
@@ -54,25 +51,21 @@ describe("loginUser service function", () => {
 });
 
 describe("registerUser service function", () => {
-  describe("when called with correct username and password", () => {
-    it("should set and unset loading, call openModal with registerConfirm and redirect user to login page", async () => {
-      await registerUser(mockCredentials);
+  it("should set and unset loading, call openModal with registerConfirm and redirect user to login page", async () => {
+    await registerUser(mockCredentials);
 
-      expect(uiStore.setLoading).toHaveBeenCalled();
-      expect(uiStore.unsetLoading).toHaveBeenCalled();
-      expect(uiStore.openModal).toHaveBeenCalledWith(
-        modalPayloads.confirm.registerConfirm
-      );
-      expect(push).toHaveBeenCalledWith({ name: "Log in" });
-    });
+    expect(uiStore.setLoading).toHaveBeenCalled();
+    expect(uiStore.unsetLoading).toHaveBeenCalled();
+    expect(uiStore.openModal).toHaveBeenCalledWith(
+      modalPayloads.confirm.registerConfirm
+    );
+    expect(push).toHaveBeenCalledWith({ name: "Log in" });
   });
 
-  describe("when called with incorrect username and password", () => {
+  describe("when the response returns an error status", () => {
     it("should set and unset loading and call openModal with registerError", async () => {
-      await registerUser({
-        username: "Alexan%12312",
-        password: "mmmm*+`+`+`+`---",
-      });
+      setupFaultyServer();
+      await registerUser(mockCredentials);
 
       expect(uiStore.setLoading).toHaveBeenCalled();
       expect(uiStore.unsetLoading).toHaveBeenCalled();

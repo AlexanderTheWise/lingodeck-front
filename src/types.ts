@@ -54,4 +54,12 @@ export interface NewOrModifiedCard
   image: File | null;
 }
 
+export interface FlashcardResponse {
+  flashcard: Flashcard;
+}
+
+export interface FlashcardsResponse {
+  flashcards: Flashcards;
+}
+
 export type Flashcards = Flashcard[];
