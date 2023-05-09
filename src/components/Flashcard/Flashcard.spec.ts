@@ -3,10 +3,15 @@ import { mockFlashcards } from "@/mocks/data";
 import Flashcard from "./Flashcard.vue";
 import FlashcardDelete from "../icons/FlashcardDelete.vue";
 import FlashcardModify from "../icons/FlashcardModify.vue";
+import { createTestingPinia } from "@pinia/testing";
+import router from "@/router";
 
 describe("Flashcard component", () => {
   const mountFlashcard = () =>
     mount(Flashcard, {
+      global: {
+        plugins: [createTestingPinia(), router],
+      },
       props: {
         flashcard: mockFlashcards[0],
       },

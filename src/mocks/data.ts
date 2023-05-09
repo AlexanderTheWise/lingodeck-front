@@ -4,6 +4,7 @@ import type {
   LoginTokenPayload,
   Modal,
   ModalPayload,
+  NewOrModifiedCard,
   UserCredentials,
   UserState,
 } from "@/types";
@@ -79,4 +80,14 @@ export const newFlashcardInfo: Omit<Flashcard, "id"> = {
   },
   language: "English",
   dueDate: "2023-05-20T00:00:00.000Z",
+};
+
+export const fileValue = {
+  filename: "dog.jpg",
+};
+
+export const expectedCall: Partial<NewOrModifiedCard> = {
+  front: "dog",
+  back: "perro",
+  language: "English",
 };

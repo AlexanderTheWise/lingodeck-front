@@ -117,7 +117,6 @@ const flashcardsServices = (): FlashcardsServices => {
       Object.keys(modifiedCard).forEach((key) =>
         body.append(key, modifiedCard[key as keyof NewOrModifiedCard]!)
       );
-
       const response = await fetch(`${lingodeckBack}/flashcards/${id}`, {
         body: isTesting ? JSON.stringify(modifiedCard) : body,
         method: "PATCH",
@@ -157,6 +156,7 @@ const flashcardsServices = (): FlashcardsServices => {
 
       flashcardsStore.deleteFlashcard(id);
       uiStore.unsetLoading();
+      router.go(0);
       uiStore.openModal(modalPayloads.confirm.deleteConfirm);
     } catch (error) {
       uiStore.unsetLoading();

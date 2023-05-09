@@ -21,7 +21,7 @@ setActivePinia(createTestingPinia({ stubActions: false }));
 const userStore = useUserStore();
 const uiStore = useUiStore();
 
-const { loginUser, registerUser } = userServices();
+const { loginUser, registerUser, logoutUser } = userServices();
 
 describe("loginUser service function", () => {
   vi.mocked(decodeToken).mockReturnValue(mockTokenPayload);
@@ -73,5 +73,20 @@ describe("registerUser service function", () => {
         modalPayloads.errors.registerError
       );
     });
+  });
+});
+
+describe("logoutUser service function", () => {
+  it("should set and unset loading, call $reset and call removeToken service", () => {
+    const removeSpy = vi.spyOn(
+      Object.getPrototypeOf(localStorage),
+      "removeItem"
+    );
+    logoutUser();
+
+    expect(removeSpy).toHaveBeenCalledWith("token");
+    expect(uiStore.setLoading).toHaveBeenCalled();
+    expect(uiStore.unsetLoading).toHaveBeenCalled();
+    expect(userStore.$reset).toHaveBeenCalled();
   });
 });

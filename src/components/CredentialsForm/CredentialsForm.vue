@@ -91,7 +91,7 @@ watch(isVisible, (isVisible) => {
 
   &__bec {
     position: absolute;
-    top: 9%;
+    top: 25%;
   }
 
   &__title {

@@ -39,8 +39,11 @@ function changeLanguage(selectedLanguage: string) {
 
 <style scoped lang="scss">
 .flashcards-page {
-  gap: 30px;
-
+  flex: 1;
+  margin-top: 70px;
+  text-align: center;
+  justify-content: initial;
+  gap: 20px;
   &__pagination {
     width: 200px;
     height: 45px;
@@ -51,7 +54,6 @@ function changeLanguage(selectedLanguage: string) {
   }
 
   &__counter {
-    justify-content: initial;
     gap: 10px;
     color: #e01c58;
     font-weight: 700;
